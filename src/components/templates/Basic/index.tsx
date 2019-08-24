@@ -2,7 +2,7 @@ import * as React from 'react'
 import { GlobalStyles } from '../../../styles/global'
 import Header from '../../organisms/Header'
 
-const Basic = ({ children }) => (
+const Basic: React.FC = ({ children }) => (
   <>
     <GlobalStyles />
     <Header />
