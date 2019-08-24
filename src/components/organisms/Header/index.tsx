@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import Hamburger from '../../atoms/Hamburger'
-import Overlay from '../../atoms/Overlay'
+import MenuLinks from '../../molecules/MenuLinks'
 
 interface IHeader {
   height: number
@@ -32,7 +32,7 @@ const Header: React.FC<IHeader> = ({ height }) => {
 
   return (
     <Wrapper height={ height }>
-      <Overlay isShow={ isOpen } />
+      <MenuLinks isShow={ isOpen } />
       <Logo>Logo</Logo>
       <Hamburger open={ isOpen } onClick={ onClick } />
     </Wrapper>
