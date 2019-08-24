@@ -10,6 +10,7 @@ const Logo = styled.div`
   color: #aaa;
   font-size: 30px;
   font-weight: bold;
+  line-height: 1;
 `
 
 const Header = () => (

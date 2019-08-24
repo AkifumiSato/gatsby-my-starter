@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import Basic from '../components/templates/Basic'
+import BasicLayout from '../components/templates/BasicLayout'
 
 const Contents = styled.div`
   display: block;
@@ -8,7 +8,7 @@ const Contents = styled.div`
 `
 
 export default () => (
-  <Basic>
+  <BasicLayout>
     <Contents>Hello world!</Contents>
-  </Basic>
+  </BasicLayout>
 )
