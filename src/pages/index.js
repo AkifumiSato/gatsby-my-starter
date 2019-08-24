@@ -1,3 +1,13 @@
-import React from "react"
+import React from 'react'
+import styled from 'styled-components'
+import Layout from '../components/organisms/Layout'
 
-export default () => <div>Hello world!</div>
+const Header = styled.div`
+  display: block;
+`
+
+export default () => (
+  <Layout>
+    <Header>Hello world!</Header>
+  </Layout>
+)
