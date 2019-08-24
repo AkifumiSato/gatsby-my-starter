@@ -23,11 +23,18 @@ const Logo = styled.div`
   line-height: 1;
 `
 
-const Header: React.FC<IHeader> = ({ height }) => (
-  <Wrapper height={ height }>
-    <Logo>Logo</Logo>
-    <Hamburger />
-  </Wrapper>
-)
+const Header: React.FC<IHeader> = ({ height }) => {
+  const [isOpen, setOpen] = React.useState(false)
+  const onClick = () => {
+    setOpen(!isOpen)
+  }
+
+  return (
+    <Wrapper height={ height }>
+      <Logo>Logo</Logo>
+      <Hamburger open={ isOpen } onClick={ onClick } />
+    </Wrapper>
+  )
+}
 
 export default Header

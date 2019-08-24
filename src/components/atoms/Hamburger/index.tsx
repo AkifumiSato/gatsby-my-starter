@@ -1,13 +1,8 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
 
-interface IButton {
-  open?: boolean;
-  side?: number;
-}
-
 interface IWrapper {
-  side: number;
+  side: number
 }
 
 const Wrapper = styled.button`
@@ -17,9 +12,8 @@ const Wrapper = styled.button`
   padding: 5px;
 `
 
-interface IThreeLine {
+interface IThreeLine extends IWrapper {
   open: boolean;
-  side: number;
 }
 
 const ThreeLine = styled.div`
@@ -40,14 +34,14 @@ const ThreeLine = styled.div`
     &:nth-child(3){
       top: 100%;
     }
-    ${ ({ open }: IButton) => open ? css`
+    ${ ({ open }: IThreeLine) => open ? css`
       transition: .3s;
       &:first-child {
-        background-color: transparent!important;
-      }
-      &:nth-child(2) {
         top: 50%;
         transform: rotate(-45deg);
+      }
+      &:nth-child(2) {
+        background-color: transparent!important;
       }
       &:nth-child(3) {
         top: 50%;
@@ -59,8 +53,14 @@ const ThreeLine = styled.div`
     }
 `
 
-const Hamburger: React.FC<IButton> = ({ open = false, side = 20 }) => (
-  <Wrapper side={ side }>
+interface IButton {
+  open?: boolean
+  side?: number
+  onClick: () => void
+}
+
+const Hamburger: React.FC<IButton> = ({ open = false, side = 20, onClick }) => (
+  <Wrapper side={ side } onClick={ onClick }>
     <ThreeLine open={ open } side={ side }>
       <span />
       <span />
