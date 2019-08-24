@@ -2,15 +2,18 @@ import * as React from 'react'
 import styled from 'styled-components'
 import Hamburger from '../../atoms/Hamburger'
 
-const Wrapper = styled.header`
-  background-color: #eee;
-  padding: 20px;
-  position: relative;
-`
+interface IHeader {
+  height: number
+}
 
-const HamburgerWrapper = styled.div`
-  position: absolute;
-  right: 10px;
+const Wrapper = styled.header`
+  align-items: center;
+  background-color: #eee;
+  display: flex;
+  height: ${ ({ height }: IHeader) => height }px;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: relative;
 `
 
 const Logo = styled.div`
@@ -20,12 +23,10 @@ const Logo = styled.div`
   line-height: 1;
 `
 
-const Header = () => (
-  <Wrapper>
-    <HamburgerWrapper>
-      <Hamburger />
-    </HamburgerWrapper>
+const Header: React.FC<IHeader> = ({ height }) => (
+  <Wrapper height={ height }>
     <Logo>Logo</Logo>
+    <Hamburger />
   </Wrapper>
 )
 

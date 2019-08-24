@@ -5,14 +5,14 @@ import Header from '../../organisms/Header'
 import Footer from '../../organisms/Footer'
 
 const Contents = styled.div`
-  min-height: calc(100vh - 70px - 54px);
+  min-height: calc(100vh - 80px - 54px);
   position: relative;
 `
 
 const BasicLayout: React.FC = ({ children }) => (
   <>
     <GlobalStyles />
-    <Header />
+    <Header height={ 80 } />
     <Contents>
       { children }
     </Contents>

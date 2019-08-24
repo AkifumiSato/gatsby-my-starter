@@ -25,13 +25,13 @@ interface IThreeLine {
 const ThreeLine = styled.div`
   height: ${ ({ side }: IThreeLine) => side - 1 }px;
   position: relative;
-  width: ${ ({ side }: IThreeLine) => side }px;
+  width: ${ ({ side }: IThreeLine) => side * 1.2 }px;
   & > span {
     background-color: #333;
     content: '';
     display: block;
     height: 1px;
-    width: ${ ({ side }: IThreeLine) => side }px;
+    width: ${ ({ side }: IThreeLine) => side * 1.2 }px;
     position: absolute;
     top: 0;
     &:nth-child(2){
@@ -59,7 +59,7 @@ const ThreeLine = styled.div`
     }
 `
 
-const Hamburger: React.FC<IButton> = ({ open = false, side = 30 }) => (
+const Hamburger: React.FC<IButton> = ({ open = false, side = 20 }) => (
   <Wrapper side={ side }>
     <ThreeLine open={ open } side={ side }>
       <span />
