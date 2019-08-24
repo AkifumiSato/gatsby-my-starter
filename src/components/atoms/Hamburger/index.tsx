@@ -1,70 +1,71 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
 
-const Wrapper = styled.div`
+interface IButton {
+  open?: boolean;
+  side?: number;
+}
+
+interface IWrapper {
+  side: number;
+}
+
+const Wrapper = styled.button`
+  box-sizing: content-box;
   display: block;
+  height: ${ ({ side }: IWrapper) => side }px;
   padding: 5px;
 `
 
-const Inner = styled.div`
-  height: 30px;
-  position: relative;
-  width: 30px;
-`
-
-interface IButton {
-  open?: boolean;
+interface IThreeLine {
+  open: boolean;
+  side: number;
 }
 
-const Button = styled.span`
-  &,
-  &:before,
-  &:after {
+const ThreeLine = styled.div`
+  height: ${ ({ side }: IThreeLine) => side - 1 }px;
+  position: relative;
+  width: ${ ({ side }: IThreeLine) => side }px;
+  & > span {
     background-color: #333;
     content: '';
     display: block;
     height: 1px;
+    width: ${ ({ side }: IThreeLine) => side }px;
     position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: 30px;
-  }
-  & {
     top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-  &:before {
-    top: -15px;
-    transition: .3s;
-  }
-  
-  &:after {
-    top: 15px;
-    transition: .3s;
-  }
-  ${ (props: IButton) => props.open ? css`
-    transition: .3s;
-    background-color: transparent!important;
-    &:before {
-      top: 0;
-      transform: rotate(-45deg);
+    &:nth-child(2){
+      top: 50%;
     }
-    &::after {
-      top: 0;
-      transform: rotate(45deg);
+    &:nth-child(3){
+      top: 100%;
     }
-  ` : css`
-    transition: .3s;
-  ` }
+    ${ ({ open }: IButton) => open ? css`
+      transition: .3s;
+      &:first-child {
+        background-color: transparent!important;
+      }
+      &:nth-child(2) {
+        top: 50%;
+        transform: rotate(-45deg);
+      }
+      &:nth-child(3) {
+        top: 50%;
+        transform: rotate(45deg);
+      }
+    ` : css`
+      transition: .3s;
+    ` }
+    }
 `
 
-const Hamburger: React.FC<IButton> = ({ open = false }) => (
-  <Wrapper>
-    <Inner>
-      <Button open={ open } />
-    </Inner>
+const Hamburger: React.FC<IButton> = ({ open = false, side = 30 }) => (
+  <Wrapper side={ side }>
+    <ThreeLine open={ open } side={ side }>
+      <span />
+      <span />
+      <span />
+    </ThreeLine>
   </Wrapper>
 )
 
