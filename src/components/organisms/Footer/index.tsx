@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
-const Wrapper = styled.header`
+const Wrapper = styled.footer`
   background-color: #eee;
   padding: 20px;
 `

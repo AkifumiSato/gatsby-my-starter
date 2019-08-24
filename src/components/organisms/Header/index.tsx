@@ -1,9 +1,16 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import Hamburger from '../../atoms/Hamburger'
 
 const Wrapper = styled.header`
   background-color: #eee;
   padding: 20px;
+  position: relative;
+`
+
+const HamburgerWrapper = styled.div`
+  position: absolute;
+  right: 10px;
 `
 
 const Logo = styled.div`
@@ -15,6 +22,9 @@ const Logo = styled.div`
 
 const Header = () => (
   <Wrapper>
+    <HamburgerWrapper>
+      <Hamburger />
+    </HamburgerWrapper>
     <Logo>Logo</Logo>
   </Wrapper>
 )
