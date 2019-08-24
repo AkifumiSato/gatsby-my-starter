@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { GlobalStyles } from '../../../styles/global'
+import Header from '../../organisms/Header'
 
-const Layout = ({ children }) => (
+const Basic = ({ children }) => (
   <>
     <GlobalStyles />
+    <Header />
     { children }
   </>
 )
 
-export default Layout
+export default Basic

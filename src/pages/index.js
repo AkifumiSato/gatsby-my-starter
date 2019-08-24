@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import Layout from '../components/organisms/Layout'
+import Basic from '../components/templates/Basic'
 
-const Header = styled.div`
+const Contents = styled.div`
   display: block;
+  padding: 30px;
 `
 
 export default () => (
-  <Layout>
-    <Header>Hello world!</Header>
-  </Layout>
+  <Basic>
+    <Contents>Hello world!</Contents>
+  </Basic>
 )
