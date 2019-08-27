@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { zIndex } from '../../../styles/layout'
+import { CSSTransition } from 'react-transition-group'
 
 const fadeOut = keyframes`
   0% {
@@ -24,15 +25,10 @@ const fadeIn = keyframes`
   }
 `
 
-interface IOverlay {
-  isShow: boolean
-}
-
 const Overlay = styled.div`
-  animation: ${ ({ isShow }: IOverlay) => isShow ? fadeIn : fadeOut } .5s;
   animation-fill-mode: forwards;
   background-color: #000;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -44,7 +40,25 @@ const Overlay = styled.div`
   right: 0;
   margin: auto;
   z-index: ${ zIndex.overlay };
+  &.anim-enter,
+  &.anim-enter-done,
+  &.anim-exit {
+    display: flex;
+  }
+  &.anim-enter {
+    animation: ${ fadeIn } .5s;
+  }
+  &.anim-exit {
+    animation: ${ fadeOut } .5s;
+  }
+  &.anim-exit-done {
+    display: none;
+  }
 `
+
+interface IOverlay {
+  isShow: boolean
+}
 
 const LinkList = styled.ul`
   & > li:not(:first-child) {
@@ -58,11 +72,18 @@ interface ILinkItem {
 }
 
 const LinkItem = styled.li`
-  animation: ${ ({ isShow }: ILinkItem) => isShow ? fadeIn : 'none' } .5s;
-  animation-delay: ${ ({ delay }: ILinkItem) => delay * 0.1 }s;
-  animation-fill-mode: forwards;
   opacity: 0;
-
+  animation-fill-mode: forwards;
+  &.anim-enter-done {
+    opacity: 1;
+  }
+  &.anim-enter {
+    animation: ${ fadeIn } .5s;
+    animation-delay: ${ ({ delay }: ILinkItem) => delay * 0.1 }s;
+  }
+  &.anim-exit {
+    animation: ${ fadeOut } .5s;
+  }
 `
 
 const Links = styled.a`
@@ -79,22 +100,52 @@ interface IMenuLinks extends IOverlay {
 }
 
 const MenuLinks: React.FC<IMenuLinks> = ({ isShow }) => (
-  <Overlay isShow={ isShow }>
-    <LinkList>
-      <LinkItem isShow={ isShow } delay={ 1 }>
-        <Links>hoge 1page</Links>
-      </LinkItem>
-      <LinkItem isShow={ isShow } delay={ 2 }>
-        <Links>hoge 2page</Links>
-      </LinkItem>
-      <LinkItem isShow={ isShow } delay={ 3 }>
-        <Links>hoge 3page</Links>
-      </LinkItem>
-      <LinkItem isShow={ isShow } delay={ 4 }>
-        <Links>hoge 4page</Links>
-      </LinkItem>
-    </LinkList>
-  </Overlay>
+  <CSSTransition
+    in={ isShow }
+    timeout={ 500 }
+    classNames="anim"
+  >
+    <Overlay>
+      <LinkList>
+        <CSSTransition
+          in={ isShow }
+          timeout={ 500 }
+          classNames="anim"
+        >
+          <LinkItem isShow={ isShow } delay={ 1 }>
+            <Links>hoge 1page</Links>
+          </LinkItem>
+        </CSSTransition>
+        <CSSTransition
+          in={ isShow }
+          timeout={ 500 }
+          classNames="anim"
+        >
+          <LinkItem isShow={ isShow } delay={ 2 }>
+            <Links>hoge 2page</Links>
+          </LinkItem>
+        </CSSTransition>
+        <CSSTransition
+          in={ isShow }
+          timeout={ 500 }
+          classNames="anim"
+        >
+          <LinkItem isShow={ isShow } delay={ 3 }>
+            <Links>hoge 3page</Links>
+          </LinkItem>
+        </CSSTransition>
+        <CSSTransition
+          in={ isShow }
+          timeout={ 500 }
+          classNames="anim"
+        >
+          <LinkItem isShow={ isShow } delay={ 4 }>
+            <Links>hoge 4page</Links>
+          </LinkItem>
+        </CSSTransition>
+      </LinkList>
+    </Overlay>
+  </CSSTransition>
 )
 
 export default MenuLinks
